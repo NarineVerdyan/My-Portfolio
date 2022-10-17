@@ -1,0 +1,337 @@
+{
+	"info": {
+		"_postman_id": "765bf45f-77c1-47f3-bb81-1d33859963fa",
+		"name": "API Testing",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23181410"
+	},
+	"item": [
+		{
+			"name": "Login (admin)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var res = JSON.parse(responseBody);\r",
+							"{\r",
+							"pm.environment.set(\"token\", res.token);\r",
+							"}\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "Nanami93",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "Nanami",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://exam-qwallity.herokuapp.com/login/api",
+					"protocol": "https",
+					"host": [
+						"exam-qwallity",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"login",
+						"api"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add new fundamental course",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = JSON.parse(responseBody);\r",
+							"pm.environment.set(\"course_id\", data.id);\r",
+							"\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"title\": \"Ratio Technique\",\r\n  \"body\": \"The ability to divide his target with lines and forcibly create a weak spot at the ratio point of seven to three\",\r\n  \"coursetype\": \"1\",\r\n  \"author\": \"Nanami\",\r\n  \"price\": 450\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://exam-qwallity.herokuapp.com/add_course/api",
+					"protocol": "https",
+					"host": [
+						"exam-qwallity",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"add_course",
+						"api"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Set Discount",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"course_type\": \"Fundamental\",\r\n  \"discount\": 50,\r\n  \"course_count\": 4\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://exam-qwallity.herokuapp.com/set_discount/api",
+					"protocol": "https",
+					"host": [
+						"exam-qwallity",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"set_discount",
+						"api"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login (non admin)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var res = JSON.parse(responseBody);\r",
+							"{\r",
+							"pm.environment.set(\"token1\", res.token);\r",
+							"}\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "inumaki9",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "Inumaki",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://exam-qwallity.herokuapp.com/login/api",
+					"protocol": "https",
+					"host": [
+						"exam-qwallity",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"login",
+						"api"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buy Course",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token1}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://exam-qwallity.herokuapp.com/buy_course/api/{{id}}/{{username}}",
+					"protocol": "https",
+					"host": [
+						"exam-qwallity",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"buy_course",
+						"api",
+						"{{id}}",
+						"{{username}}"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Course",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://exam-qwallity.herokuapp.com/courses/course/{{id}}",
+					"protocol": "https",
+					"host": [
+						"exam-qwallity",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"courses",
+						"course",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
